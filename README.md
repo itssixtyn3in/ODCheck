@@ -41,5 +41,11 @@ ODCheck provides a few customization options from here that can be used, dependi
 
 Once a sync connection has been set up to the Sharepoint Document Library and the ODCheck client has been executed, then commands can be executed by dropping the payload files into the shared sync folder. 
 
+- Enumeration: Runs multiple Windows enumeration commands and returns the output into the sync folder.
+- Reverse Shell: Attempts to run a powershell base64 encoded reverse shell
+- Execute remote Powershell script: Attempts executing a remote powershell script
+- Install ODCheck protocol handler: Install the ODCheck protocol handler as a backdoor that can be triggered with odcheck://
+- Trigger CVE-2023-32214: Attempts to run the MS-CXH-FULL protocol handler to cause a black screen condition.
+
 https://github.com/itssixtyn3in/ODCheck/assets/130003354/36ea337f-ed2c-427e-9d4e-9628c812404f
 
