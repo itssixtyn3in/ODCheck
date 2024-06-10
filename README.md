@@ -31,7 +31,10 @@ ODCheck provides a few customization options from here that can be used, dependi
 
 - Option 3) Packages the script into an EXE file.
  <br/><br/>
- 
+
+ **Customizing the ODCheck Commands**
+ The ODCheck client has been set up with five commands out of the box, but for the full functionality you will want to edit some of the commands to work for your needs (change the IP for the listener etc)
+  <br/><br/>
  **Establishing A Sync Connection**
  
  The Microsoft Teams client in it's default configuration allows users to add website tabs to private conversations, or Teams channels. The website tab option can be linked to external pages, which can be used as a jumping point to have users sync specific Sharepoint libraries using the ODOpen:// protocol handler. For further details regarding this please see https://www.collectingflags.com
