@@ -33,11 +33,12 @@ ODCheck provides a few customization options from here that can be used, dependi
  <br/><br/>
 
  **Customizing the ODCheck Commands**
+ 
  The ODCheck client has been set up with five commands out of the box, but for the full functionality you will want to edit some of the commands to work for your needs (change the IP for the listener etc)
   <br/><br/>
  **Establishing A Sync Connection**
  
- The Microsoft Teams client in it's default configuration allows users to add website tabs to private conversations, or Teams channels. The website tab option can be linked to external pages, which can be used as a jumping point to have users sync specific Sharepoint libraries using the ODOpen:// protocol handler. For further details regarding this please see https://www.collectingflags.com
+ The Microsoft Teams client in it's default configuration allows users to add website tabs to private conversations, or Teams channels. The website tab option can be linked to external pages, which can be used as a jumping point to have users sync specific Sharepoint libraries using the ODOpen:// protocol handler. For further details regarding this please see https://collectingflags.com/research/file-extension-spoofing-in-microsoft-sharepoint-onedrive-and-teams/
 
  If you've taken over a Office 365 account and can create Sharepoint Sites and write Microsoft Teams messages, then you can retrieve the ODSync link the following way. 
 - Create a new sharepoint library and upload a file
