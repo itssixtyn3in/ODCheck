@@ -1,3 +1,6 @@
+#DISCLAIMER:
+This tool is to be used for educational purposes only. I do not take responsibility if you use this in any other way. It's a proof of concept solution that was created for https://collectingflags.com/research/file-extension-spoofing-in-microsoft-sharepoint-onedrive-and-teams/ If you use this for malicious reasons, you will most likely get caught. Don't do it.
+
 # ODCheck
 
 ODCheck is a C2-like proof-of-concept solution designed to empower security professionals in evaluating their alerting systems against specific cyber-attacks within the Office 365 environment. This tool simplifies the process of testing local security solutions, particularly in scenarios involving data exfiltration through OneDrive and Sharepoint traffic.
@@ -9,6 +12,10 @@ ODCheck is a C2-like proof-of-concept solution designed to empower security prof
 | Masquerading: Right-to-Left Override            |   [T1036.002](https://attack.mitre.org/techniques/T1036/002/)   |
 | Modify Registry    |  [T1112](https://attack.mitre.org/techniques/T1112/)   |
 | Automated Collection |  [T1119](https://attack.mitre.org/techniques/T1119/)   |
+| Denial of Service | [T0814](https://attack.mitre.org/techniques/T0814/)  |
+|Command and Scripting Interpreter: PowerShell| [T1059.001](https://attack.mitre.org/techniques/T0814/) |
+|Ingress Tool Transfer | [T1105](https://attack.mitre.org/techniques/T1105/) |
+|Web Service: Bidirectional Communication| [T1102.002](https://attack.mitre.org/techniques/T1102/002/)
 <br/>
 
  **Setting Up ODCheck**
@@ -25,7 +32,7 @@ git clone https://github.com/itssixtyn3in/ODCheck
 ```
 ODCheck provides a few customization options from here that can be used, depending on what all you want to test.
 
-- Option 1) This will customize the variables of the files that ODCheck will watch out for when the agent has been executed on a host. The setup will also require that you know the tenant and document library name that you will be using for the mutual sync connection. When setting up a document library that can be 
+- Option 1) This will customize the variables of the files that ODCheck will watch out for when the agent has been executed on a host. The setup will also require that you know the tenant and document library name that you will be using for the mutual sync connection. This information will be required to setup the sync connection to the correct local folder.
 
 - Option 2) Inject a file name with the Right-To-Left-Override character to spoof the file extension.
 
@@ -43,7 +50,7 @@ ODCheck provides a few customization options from here that can be used, dependi
  If you've taken over a Office 365 account and can create Sharepoint Sites and write Microsoft Teams messages, then you can retrieve the ODSync link the following way. 
 - Create a new sharepoint library and upload a file
 - In a browser open up your dev tools > network > click on the 'sync' button on the Sharepoint page to trigger the ODOpen command
-- Cope the URL from the network section entry
+- Copy the URL from the network section entry
   
  ![onedrive_link-1024x231](https://github.com/itssixtyn3in/ODCheck/assets/130003354/40d0c5a7-c598-4a7f-adfb-349c533b7724)
 
