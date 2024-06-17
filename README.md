@@ -1,10 +1,11 @@
-#DISCLAIMER:
-This tool is to be used for educational purposes only. I do not take responsibility if you use this in any other way. It's a proof of concept solution that was created for https://collectingflags.com/research/file-extension-spoofing-in-microsoft-sharepoint-onedrive-and-teams/ If you use this for malicious reasons, you will most likely get caught. Don't do it.
+# DISCLAIMER:
+This tool is to be used for educational purposes only. I do not take responsibility if you use this in any other way. 
+
+It's a proof of concept solution that was created for https://collectingflags.com/research/file-extension-spoofing-in-microsoft-sharepoint-onedrive-and-teams/ If you use this for malicious reasons, you will most likely get caught. Don't do it.
 
 # ODCheck
 
-ODCheck is a C2-like proof-of-concept solution designed to empower security professionals in evaluating their alerting systems against specific cyber-attacks within the Office 365 environment. This tool simplifies the process of testing local security solutions, particularly in scenarios involving data exfiltration through OneDrive and Sharepoint traffic.
-<br/><br/>
+ODCheck is a C2-like proof-of-concept solution designed to evaluate systems against data exfiltration through OneDrive sync traffic. The ODOpen URL can be used for spear phishing in the Microsoft Teams desktop client to establish sync connections with a target through the auto sync functionality. If the connection is successful to an attacker controlled library and the user executes ODCheck, then the client can be used to run commands on the machine based on the file names that are detected in the sync folder. The prebuilt tools and scripts available can help test for the following MITRE techniques:
 
 | MITRE Technique             | ID |
 | :---------------- | :------: |
@@ -32,17 +33,16 @@ git clone https://github.com/itssixtyn3in/ODCheck
 ```
 ODCheck provides a few customization options from here that can be used, depending on what all you want to test.
 
-- Option 1) This will customize the variables of the files that ODCheck will watch out for when the agent has been executed on a host. The setup will also require that you know the tenant and document library name that you will be using for the mutual sync connection. This information will be required to setup the sync connection to the correct local folder.
+- When configuring ODCheck, the file names that it watches for will be randomized and copied to the 'Payload folder'. These are the files that you will want to drop into the Sharepoint folder once ODCheck has been activated. The setup will also require that you know the tenant and document library name that you will be using for the mutual sync connection. This information will be required to setup the sync connection to the correct local folder.
 
-- Option 2) Inject a file name with the Right-To-Left-Override character to spoof the file extension.
+- I recommend that you host your reverse shell and other scripts externally. The wizard will ask you for the URL that they're hosted on. 
 
-- Option 3) Packages the script into an EXE file.
- <br/><br/>
+- If you want to package the file into an EXE with a custom icon, then just specify the file path for the .ico file.
 
- **Customizing the ODCheck Commands**
- 
- The ODCheck client has been set up with five commands out of the box, but for the full functionality you will want to edit some of the commands to work for your needs (change the IP for the listener etc)
-  <br/><br/>
+![odcheck_usage](https://github.com/itssixtyn3in/ODCheck/assets/130003354/0824c20a-0c39-47d9-889a-2ebab659e127)
+
+ <br/>
+
  **Establishing A Sync Connection**
  
  The Microsoft Teams client in it's default configuration allows users to add website tabs to private conversations, or Teams channels. The website tab option can be linked to external pages, which can be used as a jumping point to have users sync specific Sharepoint libraries using the ODOpen:// protocol handler. For further details regarding this please see https://collectingflags.com/research/file-extension-spoofing-in-microsoft-sharepoint-onedrive-and-teams/
@@ -53,7 +53,6 @@ ODCheck provides a few customization options from here that can be used, dependi
 - Copy the URL from the network section entry
   
  ![onedrive_link-1024x231](https://github.com/itssixtyn3in/ODCheck/assets/130003354/40d0c5a7-c598-4a7f-adfb-349c533b7724)
-
 
  Your link for the sync connection will look similar to this:
  ```
@@ -73,10 +72,10 @@ exit;
 Once a sync connection has been set up to the Sharepoint Document Library and the ODCheck client has been executed, then commands can be executed by dropping the payload files into the shared sync folder. 
 
 - Enumeration: Runs multiple Windows enumeration commands and returns the output into the sync folder.
-- Reverse Shell: Attempts to run a powershell base64 encoded reverse shell
-- Execute remote Powershell script: Attempts executing a remote powershell script
-- Install ODCheck protocol handler: Install the ODCheck protocol handler as a backdoor that can be triggered with odcheck://
-- Trigger CVE-2023-32214: Attempts to run the MS-CXH-FULL protocol handler to cause a black screen condition.
+- Reverse Shell: Attempts to run an external script that spawns a reverse shell.
+- DOS Condition: Attempts to trigger CVE-2023-32214 which causes a blackscreen for the user if ms-cxh-full:// is available. The screen will reappear if the machine is restarted.
+- External Scripts: Attempts to run an external PowerShell script for customization purposes.
+- Tool Move: Attempts to move the specified file from the OneDrive folder into Downloads (or another specified folder if manually changed in the script)
 
 https://github.com/itssixtyn3in/ODCheck/assets/130003354/36ea337f-ed2c-427e-9d4e-9628c812404f
 
