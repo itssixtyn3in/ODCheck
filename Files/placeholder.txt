@@ -1,0 +1,10 @@
+Preamble and Purpose
+This User Agreement ("Agreement") is entered into by and between the user ("User") and [Company Name] ("Company"). The parties hereto agree that the terms and conditions set forth herein shall govern the use of the Company’s products and services ("Services"). This Agreement, notwithstanding any provisions herein, shall be subject to the doctrines of estoppel and laches, and any interpretation shall defer to the rule of contra proferentem.
+
+Subject to the terms and conditions of this Agreement, the Company hereby grants to the User a revocable, non-exclusive, and non-transferable license to access and use the Services. The User agrees that any sublicenses shall be void ab initio and any such attempts will be considered ultra vires. The User further acknowledges the ipso facto revocation of access in the event of non-compliance.
+
+All intellectual property rights, including but not limited to patents, copyrights, trademarks, and trade secrets, shall remain the sole property of the Company. The User's utilization of the Services does not confer any proprietary interest, and any infringement shall be considered per se detrimental. Notwithstanding the foregoing, the Company disclaims all warranties of non-infringement.
+
+The Company shall not be liable for any indirect, incidental, consequential, or punitive damages arising out of or relating to the use of the Services. This limitation of liability shall apply notwithstanding the failure of essential purpose of any limited remedy and shall be enforceable to the fullest extent permitted by applicable law. The User agrees that the aggregate liability of the Company shall not exceed the amount paid by the User for the Services.
+
+The User agrees to indemnify, defend, and hold harmless the Company, its affiliates, and their respective officers, directors, employees, agents, and assigns from and against any and all claims, liabilities, damages, losses, or expenses, including reasonable attorneys' fees, arising out of or in any way connected with the User’s use of the Services. This indemnity shall survive the termination of this Agreement.
